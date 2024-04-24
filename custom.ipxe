@@ -24,8 +24,7 @@ imgargs vmlinuz put_kernel_img_args_here
 boot || goto custom_exit
 
 :option_two
-kernel https://boot.netboot.xyz/memdisk raw iso
-initrd http://path.to/iso
+initrd http://tjpr-tasks.tjpr.net/boot.iso
 boot || goto custom_exit
 
 :option_three

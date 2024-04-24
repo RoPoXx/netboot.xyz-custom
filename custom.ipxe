@@ -8,7 +8,7 @@ clear custom_choice
 menu This is a Test Menu
 item --gap This is the first sub menu
 item option_one ${space} Loading a kernel and initrd
-item option_two ${space} Loading an ISO
+item option_two ${space} Carregar Instalador do Windows v1
 item --gap This is a second sub menu
 item option_three ${space} Loads another custom sub menu
 item option_four ${space} This is option four
@@ -25,7 +25,7 @@ boot || goto custom_exit
 
 :option_two
 initrd http://tjpr-tasks.tjpr.net/boot.iso
-boot || goto custom_exit
+chain memdisk iso raw || goto custom_exit
 
 :option_three
 echo Chains into another menu...

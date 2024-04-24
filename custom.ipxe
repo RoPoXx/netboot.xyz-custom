@@ -7,11 +7,11 @@
 clear custom_choice
 menu This is a Test Menu
 item --gap Sub Menu 1
-item option_one ${space} Nao usar
+item option_one ${space} Opcao 1 - Nao usar
 item option_two ${space} Carregar Instalador do Windows v1
 item --gap Sub menu 2
-item option_three ${space} Loads another custom sub menu
-item option_four ${space} This is option four
+item option_three ${space} Opcao 3 - Nao usar - Carregar outro submenu
+item option_four ${space} Opcao 4 - Nao usar
 choose custom_choice || goto custom_exit
 echo ${cls}
 goto ${custom_choice}

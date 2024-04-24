@@ -8,7 +8,7 @@ clear custom_choice
 menu This is a Test Menu
 item --gap Sub Menu 1
 item option_one ${space} Opcao 1 - Nao usar
-item option_two ${space} Carregar Instalador do Windows v2
+item option_two ${space} Carregar Instalador do Windows v3
 item --gap Sub menu 2
 item option_three ${space} Opcao 3 - Nao usar - Carregar outro submenu
 item option_four ${space} Opcao 4 - Nao usar
@@ -24,12 +24,13 @@ imgargs vmlinuz put_kernel_img_args_here
 boot || goto custom_exit
 
 :option_two
+kernel http://tjpr-tasks.tjpr.net/boot.iso iso raw
 initrd http://tjpr-tasks.tjpr.net/boot.iso
-boot || goto custom_exit
+boot
 
 :option_three
 echo Chains into another menu...
-chain https://raw.githubusercontent.com/${ropoxx}/netboot.xyz-custom/master/custom.ipxe || goto custom
+chain https://raw.githubusercontent.com/${RoPoXx}/netboot.xyz-custom/master/custom.ipxe || goto custom
 
 :custom_exit
 chain utils.ipxe

@@ -6,10 +6,10 @@
 :custom
 clear custom_choice
 menu This is a Test Menu
-item --gap This is the first sub menu
-item option_one ${space} Loading a kernel and initrd
+item --gap Sub Menu 1
+item option_one ${space} Nao usar
 item option_two ${space} Carregar Instalador do Windows v1
-item --gap This is a second sub menu
+item --gap Sub menu 2
 item option_three ${space} Loads another custom sub menu
 item option_four ${space} This is option four
 choose custom_choice || goto custom_exit

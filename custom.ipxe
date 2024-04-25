@@ -49,7 +49,7 @@ chain https://raw.githubusercontent.com/RoPoXx/netboot.xyz-custom/master/custom.
 sanboot --no-describe --drive 0x81 http://tjpr-tasks.tjpr.net/boot.iso || goto option_three
 
 :option_six
-initrd windows-7/ultimate-${arch}-en.iso
+initrd http://tjpr-tasks.tjpr.net/boot.iso
 chain memdisk iso raw || goto option_three
 
 :custom_exit

@@ -5,22 +5,34 @@
 
 :custom
 clear custom_choice
-menu This is a Test Menu
+menu Menu de Testes personalizado RoPoXx
 item --gap Sub Menu 1
-item option_one ${space} Opcao 1 - Nao usar
-item option_two ${space} Carregar Instalador do Windows v3
+item option_one ${space} Opcao 1 - Instalador com midia descompactada
+item option_two ${space} Carregar Instalador do Windows via ISO metodo 1
+item option_five ${space} Carregar Instalador do Windows via ISO metodo 2
 item --gap Sub menu 2
 item option_three ${space} Opcao 3 - Nao usar - Carregar outro submenu
-item option_four ${space} Opcao 4 - Nao usar
+item option_four ${space} Opcao 4 - Voltar ao menu principal
 choose custom_choice || goto custom_exit
 echo ${cls}
 goto ${custom_choice}
 goto custom_exit
 
 :option_one
-kernel http://path.to/vmlinuz
-initrd http://path.to/initrd
-imgargs vmlinuz put_kernel_img_args_here
+# Start Windows 7 installer DVD
+#sanboot --no-describe --drive 0x81 ${sanboot-url}windows-7/ultimate-${arch}-en.iso || goto failed
+# Better solution, according to Oliver Rath on the mailing-list
+# Requires massive amounts of RAM, though
+#initrd windows-7/ultimate-${arch}-en.iso
+#chain memdisk iso raw || goto failed
+# This method uses wimboot
+set base-url http://tjpr-tasks.tjpr.net/win/x64
+kernel wimboot
+initrd ${base-url}/bootmgr                     bootmgr
+initrd ${base-url}/boot/bcd                    BCD
+initrd ${base-url}/boot/fonts/wgl4_boot.ttf    wgl4_boot.ttf
+initrd ${base-url}/boot/boot.sdi               boot.sdi
+initrd ${base-url}/sources/boot.wim            boot.wim
 boot || goto custom_exit
 
 :option_two
@@ -30,7 +42,10 @@ boot
 
 :option_three
 echo Chains into another menu...
-chain https://raw.githubusercontent.com/${RoPoXx}/netboot.xyz-custom/master/custom.ipxe || goto custom
+chain https://raw.githubusercontent.com/RoPoXx/netboot.xyz-custom/master/custom.ipxe || goto custom
+
+:option_five
+sanboot --no-describe --drive 0x81 http://tjpr-tasks.tjpr.net/boot.iso || goto custom_exit
 
 :custom_exit
 chain utils.ipxe

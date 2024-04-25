@@ -10,6 +10,7 @@ item --gap Sub Menu 1
 item option_one ${space} Opcao 1 - Instalador com midia descompactada
 item option_two ${space} Carregar Instalador do Windows via ISO metodo 1
 item option_five ${space} Carregar Instalador do Windows via ISO metodo 2
+item option_six ${space} Carregar Instalador do Windows via ISO metodo 3
 item --gap Sub menu 2
 item option_three ${space} Opcao 3 - Nao usar - Carregar outro submenu
 item option_four ${space} Opcao 4 - Voltar ao menu principal
@@ -42,10 +43,14 @@ boot
 
 :option_three
 echo Chains into another menu...
-chain https://raw.githubusercontent.com/RoPoXx/netboot.xyz-custom/master/custom.ipxe || goto custom
+chain https://raw.githubusercontent.com/RoPoXx/netboot.xyz-custom/master/custom.ipxe || goto option_three
 
 :option_five
-sanboot --no-describe --drive 0x81 http://tjpr-tasks.tjpr.net/boot.iso || goto custom_exit
+sanboot --no-describe --drive 0x81 http://tjpr-tasks.tjpr.net/boot.iso || goto option_three
+
+:option_six
+initrd windows-7/ultimate-${arch}-en.iso
+chain memdisk iso raw || goto option_three
 
 :custom_exit
 chain utils.ipxe

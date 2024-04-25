@@ -50,7 +50,7 @@ sanboot --no-describe --drive 0x81 http://tjpr-tasks.tjpr.net/boot.iso || goto o
 
 :option_six
 initrd http://tjpr-tasks.tjpr.net/boot.iso
-chain memdisk iso raw || goto option_three
+chain memdisk iso raw
 
 :custom_exit
 chain utils.ipxe
